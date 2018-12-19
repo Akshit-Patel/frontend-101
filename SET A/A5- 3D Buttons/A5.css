@@ -1,8 +1,9 @@
 body{
 margin: 0;
-padding: 0;  
+padding:0;
 }
-.container{
+
+.container {
 display: flex;
 width: 100vw;
 height: 25vw;
@@ -22,7 +23,7 @@ width: 25vw;
 height: 15vw;
 background: red;
 line-height: 15vw;
-margin: 5%;
+margin:5%;
 color: white;
 font-family: sans-serif;
 font-weight:900;
@@ -46,7 +47,7 @@ height:100%;
 width:50%;
 z-index: 0;
 display: block;
-position:absolute;
+position: absolute;
 left:100%;
 transform-origin: 0 50%;
 perspective-origin: 0% 50%;
@@ -63,5 +64,5 @@ transform: translate(-18vw,-4.5%) perspective(1000px);
 cursor:pointer;
 }
 .container div:nth-child(1):active:before{
- transform: perspective(6.5vw) rotateY(90deg);
+transform: perspective(6.5vw) rotateY(90deg);
 }
