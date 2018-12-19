@@ -1,10 +1,8 @@
 body{
-	margin: 0;
-	padding:0;
-  
+margin: 0;
+padding: 0;  
 }
-
-.container {
+.container{
 display: flex;
 width: 100vw;
 height: 25vw;
@@ -24,7 +22,7 @@ width: 25vw;
 height: 15vw;
 background: red;
 line-height: 15vw;
-margin:5%;
+margin: 5%;
 color: white;
 font-family: sans-serif;
 font-weight:900;
@@ -56,7 +54,14 @@ transform: perspective(6.5vw) rotateY(30deg) ;
 border-width: 2.124px;
 border-style: solid;
 border-color: black;
-top:-1.75px;
+top: -1.75px;
 transition: .25s;
 transform-style: preserve-3d;
+}
+.container div:nth-child(1):active{
+transform: translate(-18vw,-4.5%) perspective(1000px);
+cursor:pointer;
+}
+.container div:nth-child(1):active:before{
+ transform: perspective(6.5vw) rotateY(90deg);
 }
