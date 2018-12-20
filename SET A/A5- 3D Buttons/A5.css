@@ -2,7 +2,6 @@ body{
 margin: 0;
 padding:0; 
 }
-
 .container{
 display: flex;
 width: 100vw;
@@ -132,4 +131,26 @@ height: 15vw;
 line-height: 15vw;
 transform-origin: 0% 50%;
 transform: translate(calc(6vw - 2px), -2vw) rotateY(calc(+90deg - 28.3deg)) skewY(-19.4deg);
+}
+
+.container div:nth-child(2):active span{
+cursor: pointer;
+}
+.container div:nth-child(2):active > span:nth-child(1){
+transform: translate(-11vw, -8vw) translateZ(-15vw);
+}
+.container div:nth-child(2):active > span:nth-child(2){
+display: none;
+}
+.container div:nth-child(2):active > span:nth-child(3){
+transform: translate(-11vw, -24vw) skewX(0deg) rotateX(0deg);
+}
+.container div:nth-child(2):active > span:nth-child(4){
+transform: translate(calc(-11vw + 2px), -8vw) rotateY(180deg) skewY(0deg);
+}
+.container div:nth-child(2):active > span:nth-child(5){
+transform: translate(-11vw, calc(7vw - 2px)) skewX(0deg) rotateX(0deg);
+}
+.container div:nth-child(2):active > span:nth-child(6){
+transform: translate(calc(14vw - 2px), -8vw) rotateY(0deg) skewY(0deg);
 }
