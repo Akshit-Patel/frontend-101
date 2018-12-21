@@ -1,0 +1,128 @@
+body{
+margin:0;
+padding:0;
+}
+div{
+position: absolute;
+display: block;
+top:50%;
+left: 50%;
+transform:translate(-50%, -50%);
+}
+.container{
+height:100vh;
+width:100vw;
+}
+#screen{
+width: 301px;
+height: 610px;
+border-radius: 25px 25px 25px 25px;
+border: rgb(20,18,18) 1px solid;
+z-index: 4;
+background-color: white;
+background-image:linear-gradient(to right, #ff99cc 0% , #3333ff 100%),
+radial-gradient( ellipse at 35% 80%,#ffe7ee 1%, #fa91ac 50%);
+}
+#casing_inner
+{
+width: 320px;
+height: 630px;
+border-radius: 34px 34px 34px 34px;
+border: black 4px solid;
+background-color: white;
+z-index: 2;
+background: linear-gradient(to right, white,rgba(0,0,0,0.8) 5px, rgba(0,0,0,01) 315px,white);
+}
+#casing_inner_layer
+{
+width: 320px;
+height: 637px;
+border-radius: 34px 34px 34px 34px;
+background-color: white;
+z-index: 3;
+background: linear-gradient(to right, white,rgba(0,0,0,0.8) 5px, rgba(0,0,0,01) 315px,white);
+border: 2px solid black;
+box-shadow: inset 0 0 6px white;
+}
+#casing_outer{
+width: 336px;
+height: 646px;
+z-index:-1;
+background-color: #C1C3C4;
+border-radius: 38px 38px 38px 38px;
+}
+.button{
+background-color: rgb(140, 140, 140);
+width:3px;
+}
+.button.vol
+{
+height:50px;
+border-radius: 1.5px;
+}
+.button.vol.up{
+transform: translate(calc(-50% - 168px), calc(-50% - 150px));
+}
+.button.vol.down{
+transform: translate(calc(-50% - 168px), calc(-50% - 90px));
+}
+.button.side{
+border-radius: 0.5px;
+}
+.button.side.left{
+height:30px;
+transform: translate(calc(-50% - 168px), calc(-50% - 220px));
+}
+.button.side.right{
+height:80px;
+transform: translate(calc(-50% + 168px), calc(-50% - 150px));
+}
+#notch{
+transform: translate(calc(-50%), calc(-50% - 291px));
+width: 162px;
+height: 20px;
+background-color: black;
+z-index: 5;
+border-radius: 0px 0px 18px 18px;
+}
+.notch_coverer{
+height: 9px;
+width: 19px;
+background-clip: border-box;
+z-index: 7;
+}
+.notch_coverer.left{
+background-image: linear-gradient(to right, #ff99cc -52.5px , #3333ff calc(100% + 224px));
+border-radius: 0 27px 2px 0px / 0 28px 2px 0;
+transform: translate(calc(-50% - 90.5px), calc(-50% - 300.7px));
+}
+.notch_coverer.right{
+background-image: linear-gradient(to right, #ff99cc -186.5px , #3333ff calc(100% + 40.5px));
+border-radius: 27px 0px 0px 2px / 28px 0px 0px 2px;
+transform: translate(calc(-50% - -91px), calc(-50% - 300.7px));
+}
+#filler{
+transform: translate(calc(-50%), calc(-50% - 302px));
+width: 189px;
+height: 7px;
+z-index: 6;
+background-color: black;
+}
+#front_cam
+{
+background: #0c6688;
+transform: translate(calc(-50% + 55px), calc(-50% - 297px));
+z-index: 8;
+border-radius: 50%;
+height: 4px;
+width: 4px;
+}
+#microphone
+{
+background: #25292b;
+transform: translate(calc(-50%), calc(-50% - 297px));
+z-index: 8;
+border-radius: 0.5px;
+height: 4px;
+width: 60px;
+}
