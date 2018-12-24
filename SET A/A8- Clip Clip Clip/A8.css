@@ -1,0 +1,103 @@
+body{
+	width:100vw;
+	height:100vh;
+	margin:0px;
+}
+div{
+	top:50%;
+	left:50%;
+	position: absolute;	
+	height: 280px;
+	width: 280px;
+	display: block;
+}
+.D{
+	width:800px;
+	height: 700px;
+	position: absolute;
+	transform:translate(-50%,-50%);
+}
+#t1{
+	clip-path: polygon(90% 0, 60% 100%, 100% 100%);
+	background-color: #b4332a;
+	transform: translate(calc(-50% + -191px),calc(-50% + 185px));
+}
+#t2{
+	clip-path: polygon(90% 0%, 60% 100%, 72.8% 0%);
+	background-color: #ececec;
+	transform: translate(calc(-50% + -191px),calc(-50% + 185px));
+	z-index: 4;
+}
+#t3{
+	clip-path: polygon(70% 0%, 73% 100%, 90% 100%);
+	background-color: #201f1f;
+	transform: translate(calc(-50% + -191.5px),calc(-50% + -92px));
+	z-index: 3;
+}
+#t4{
+	clip-path: polygon(70% 0%, 90% 100%, 100% 0%);
+	background-color: #3f21cd;
+	transform: translate(calc(-50% + -192px),calc(-50% + -93px));
+	z-index: 2;
+}
+#t5{
+	clip-path: polygon(61% 0, 30% 0, 27.7% 22%);
+	background-color: #b4332a;
+	transform: translate(calc(-50% + 4px),calc(-50% + -93px));
+	z-index: 2;
+}
+#t6{
+	clip-path: polygon(37.5% 0, 100% 46%, 4.4% 22%);
+	background-color: #ffde59;
+	transform: translate(calc(-50% + 69px),calc(-50% + -93px));
+	z-index: 2;
+}
+#t7{
+	clip-path: polygon(100% 46%, 37.5% 0, 81% 11%);
+	background-color: #100f12;
+	transform: translate(calc(-50% + 69px),calc(-50% + -93px));
+	z-index: 2;
+}
+#t11{
+	clip-path: polygon(100% 0, 64% 56.2%, 94.2% 46.2%);
+	background-color: black;
+	transform: translate(calc(-50% + 86.9px),calc(-50% + 185px));
+	z-index: 3;
+}
+#t10{
+	clip-path: polygon(100% 0, 64% 56.2%, 82.2% 0%);
+	background-color: #ffde59;
+	transform: translate(calc(-50% + 86.9px),calc(-50% + 185px));
+	z-index: 4;
+}
+#t9{
+	clip-path: polygon(100% 100%, 82.2% 99.3%, 64.5% 38.6%);
+	background-color: #3f21cd;
+	transform: translate(calc(-50% + 86.9px),calc(-50% + -93px));
+	z-index: 2;
+}
+#t8{
+	clip-path: polygon(100% 100%, 93.6% 46%, 64.5% 38.6%);
+	background-color: #ececec;
+	transform: translate(calc(-50% + 86.9px),calc(-50% + -93px));
+	z-index: 2;
+}
+#t12{
+	clip-path: polygon(100% 46%, 37.5% 100%, 81% 81%);
+	background-color: #b4332a;
+	transform: translate(calc(-50% + 70.9px),calc(-50% + 185px));
+	z-index: 3;
+}
+#t13{
+	clip-path: polygon(37.5% 100%, 100% 46%, 4.1% 78%);
+	background-color: #3f21cd;
+	transform: translate(calc(-50% + 70.9px),calc(-50% + 185px));
+	z-index: 2;
+}
+#t14{
+	clip-path: polygon(39% 100%, 70.5% 100%, 37.0% 78%);
+	background-color: #ffde59;
+	transform: translate(calc(-50% + -21px),calc(-50% + 185px));
+	z-index: 2;
+}
+
