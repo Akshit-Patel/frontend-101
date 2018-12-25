@@ -7,8 +7,9 @@ flexbox
 Creating gaps at ends of odd lines and beginning of even lines in Task A1
 #### [Task A3 – Trippy Grid](https://akshit-patel.github.io/frontend-101/SET%20A/A3-Trippy%20Grid/A3.html)
 Oscillating divs in Task A2 along the viewport width together 
-#### Task A4 – Nav Bar
-Crating responsive navigation bar collapsing to hamburger menu whenever not possible to accommodate
+#### [Task A4 – Nav Bar](https://akshit-patel.github.io/frontend-101/SET%20A/A4-%20Nav%20Bar/A4.html)
+Crating responsive navigation bar collapsing to hamburger menu whenever not possible to accommodate 
+##### without javascript
 #### [Task A5 – 3D Buttons](https://akshit-patel.github.io/frontend-101/SET%20A/A5-%203D%20Buttons/A5.html)
 Two buttons 
 
