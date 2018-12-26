@@ -1,6 +1,7 @@
-.body{
+body{
 	margin: 0;
 	padding: 0;
+	background-color: chartreuse;
 }
 div{
 	position: absolute;
@@ -11,7 +12,6 @@ div{
 #container{
 	height: 45vw;
 	width: 45vw;
-	background-color: orange;
 }
 .hand{
 	transform-origin:0 50%;
