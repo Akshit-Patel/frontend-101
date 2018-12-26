@@ -1,0 +1,45 @@
+.body{
+	margin: 0;
+	padding: 0;
+}
+div{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+#container{
+	height: 45vw;
+	width: 45vw;
+	background-color: orange;
+}
+.hand{
+	transform-origin:0 50%;
+	transform:rotateZ(-90deg); 
+	background-color:black;
+}
+#second{
+	width: 18vw;
+	height: 0.25vw;
+}
+#hour{
+	width:8vw;
+	height:0.50vw;
+}
+
+#minute{
+	width:13vw;
+	height:0.50vw;
+}
+#boundary{
+	width:40vw;
+	height:40vw;
+	border-radius: 50%;
+	border: 5px solid white;
+}
+#center{
+	width:1vw;
+	height:1vw;
+	border-radius: 50%;
+	background-color: black;
+}
