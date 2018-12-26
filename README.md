@@ -1,5 +1,8 @@
 # DVM, BITS Pilani
 ## Frontend-101
+## SET-A 
+### HTML and CSS
+
 #### [Task A1 – Grid](https://akshit-patel.github.io/frontend-101/SET%20A/A1%20-%20Grid/A1.html)
 Creating a responsive grid structure using
 flexbox
@@ -22,3 +25,8 @@ Using SVG line animations to animate DVM logo
 Replicating iphoneX using HTML and CSS
 #### [Task A8 - Clip Clip Clip](https://akshit-patel.github.io/frontend-101/SET%20A/A8-%20Clip%20Clip%20Clip/A8.html)
 Recreating letter 'D' with triangles
+
+## SET-A 
+### HTML, CSS and Javascript
+#### [Task B2 – Clock](https://akshit-patel.github.io/frontend-101/SET%20B/B2-%20Clock/B2.html)
+Making clock using Javascript
