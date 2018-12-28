@@ -28,5 +28,9 @@ Recreating letter 'D' with triangles
 
 ## SET-B
 ### HTML, CSS and Javascript
+
+#### [Task B1 – Drums](https://akshit-patel.github.io/frontend-101/SET%20B/B1-%20Drums/B1.html)
+Making virtual drums playing sounds wheen key is pressed
+
 #### [Task B2 – Clock](https://akshit-patel.github.io/frontend-101/SET%20B/B2-%20Clock/B2.html)
 Making clock using Javascript
