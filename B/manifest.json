@@ -1,0 +1,27 @@
+{
+	"name": "B9",
+	"version": "1.0",
+	"description": "Creating a basic chrome extension",
+	"manifest_version": 2,
+	"content_scripts":[
+		{  
+			"matches":["https://www.bits-oasis.org/2018main/" ,"https://bits-apogee.org/2019intro/" ,"https://www.bits-bosm.org/"],
+			"js": ["B8.js"]
+		}
+	],
+	"page_action": {
+		"default_popup": "B9.html",
+		"default_icon": {
+			"16": "B8.png",
+			"32": "B8.png",
+			"48": "B8.png",
+			"128": "B8.png"
+		}
+	},
+		"icons": {
+			"16": "B8.png",
+			"32": "B8.png",
+			"48": "B8.png",
+			"128": "B8.png"
+		}
+}
