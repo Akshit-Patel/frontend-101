@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>B4</title>
+</head>
+<body>
+<p>Type "DVM"</p>
+<p id="secretMessage"></p> 
+<script>
+var array = [];
+
+window.addEventListener("keydown" , function(e){
+	array.push(e.key);
+})
+
+var t = setInterval(function(){
+	var a = array.join('');
+
+	if(a.includes("DVM")){
+		secretMessage.innerHTML="Front-End Development is fun";
+	}
+},100)
+</script>
+</body>
+</html>
