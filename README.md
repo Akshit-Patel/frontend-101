@@ -34,3 +34,15 @@ Making virtual drums playing sounds wheen key is pressed
 
 #### [Task B2 – Clock](https://akshit-patel.github.io/frontend-101/B/B2.html)
 Making clock using Javascript
+
+#### [Task B3 – Multiple Select](https://akshit-patel.github.io/frontend-101/B/B3.html)
+List of items which can select all items between last checked and current item if selected by pressing "shift key"  
+
+#### [Task B4 – Sequence Detector](https://akshit-patel.github.io/frontend-101/B/B4.html)
+When "DVM" (with capitals) on blank page, all key stroke gets detected and generate a line 
+ 
+#### [Task B5 – Image Slide In](https://akshit-patel.github.io/frontend-101/B/B5.html)
+Images slide in as you scroll page
+
+#### [Task B9 – Create a basic chrome extension](https://github.com/Akshit-Patel/frontend-101/tree/master/B)
+Creating a chrome extension which console logs "Hurray" when you visit DVM sites particularly [OASIS](https://www.bits-oasis.org/2018main/), [BOSM](https://www.bits-bosm.org/), [APOGEE](https://bits-apogee.org/2019intro/)
