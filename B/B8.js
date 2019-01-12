@@ -190,7 +190,7 @@ swipeDown.shiftDown(boxGen,a,column);}
   for(i=0; i < newElement.length ; i++){
     boxGen.push(newElement[i]);
   }
-}, 400);
+}, /*251*/ 251);
 
 }
 let swipeRight = {
@@ -408,7 +408,7 @@ swipeDown.shiftDown(boxGen,a,column);}
   for(i=0; i < newElement.length ; i++){
     boxGen.push(newElement[i]);
   }
-}, 350);
+}, 251);
 
 }
 function executeRightSwipe() {
@@ -438,7 +438,7 @@ swipeRight.shiftRight(boxGen,a,row);}
   for(i=0; i < newElement.length ; i++){
     boxGen.push(newElement[i]);
   }
-}, 400);
+}, /*400*/ 251);
 }
 function transition(a,b, boxNo,gameBoxes){
   var boxa = boxes[generateCorrespondingBoxNo(a)];
@@ -472,19 +472,37 @@ function representCurrentState(currentState){
 setInterval(function(){
 for(var i = 0 ; i < gameBoxes.length; i++){
    if(gameBoxes[i].innerHTML == 2){
-    gameBoxes[i].style.background = "white";
+    gameBoxes[i].style.background = "#ffffdd";
 }
   if(gameBoxes[i].innerHTML == 4){
-    gameBoxes[i].style.background = "red";
+    gameBoxes[i].style.background = "#ffff9a";
 }
 if(gameBoxes[i].innerHTML == 8){
-    gameBoxes[i].style.background = "yellow";
+    gameBoxes[i].style.background = "orange";
 }
 if(gameBoxes[i].innerHTML == 16){
-    gameBoxes[i].style.background = "pink";
+    gameBoxes[i].style.background = "#ff8b00";
 }
 if(gameBoxes[i].innerHTML == 32){
-    gameBoxes[i].style.background = "green";
+    gameBoxes[i].style.background = "#ff5c2d";
+}
+if(gameBoxes[i].innerHTML == 64){
+    gameBoxes[i].style.background = "rgb(226, 69, 35)";
+}
+if(gameBoxes[i].innerHTML == 128){
+    gameBoxes[i].style.background = "rgb(240, 69, 35)";
+}
+if(gameBoxes[i].innerHTML == 256){
+    gameBoxes[i].style.background = "rgb(240, 50, 20)";
+}
+if(gameBoxes[i].innerHTML == 512){
+    gameBoxes[i].style.background = "rgb(240, 30, 10)";
+}
+if(gameBoxes[i].innerHTML == 1024){
+    gameBoxes[i].style.background = "rgb(240, 10, 05)";
+}
+if(gameBoxes[i].innerHTML == 2048){
+    gameBoxes[i].style.background = "rgb(240, 0, 0)";
 }
 }
 if(a.length == 0){
@@ -501,5 +519,285 @@ window.addEventListener("keydown",function(event){
 window.addEventListener("keydown",function(event){
   if(window.event.key == "ArrowRight"){
     executeRightSwipe();
+  }
+})
+
+let swipeUp = {
+
+  elementsRemainingUp : function(gameObject,columnNo,index) {  
+    var a = [];
+    for(var i = 0; i< gameObject.length;i++) {
+      if(gameObject[i][0] < index && gameObject[i][1]== columnNo){
+        a.push(gameObject[i]);                 
+      }
+    }   
+    return a;
+  },
+
+  lowestIndexInColumn: function (currentState,columnNo) {
+    var b = [];
+    for(var i = 0 ; i < currentState.length; i++) {
+      if(currentState[i][1] == columnNo) {
+        b.push(currentState[i][0]);
+      }
+    }
+    return Math.min.apply(Math, b);
+  },
+
+  highestIndexInColumn: function(currentState,columnNo){
+    var b=[];
+    for(var i=0; i< currentState.length; i++){
+      if(currentState[i][1] == columnNo){
+        b.push(currentState[i][0]);
+      }
+    }
+    return Math.max.apply(Math, b);
+  },
+
+  shiftUp: function (currentState, gameObject, column) {
+    for (var i=(currentState.length-1); i>=0; i--) {
+    if(currentState[i][1] == column) {
+      var gameObject=gameObject;
+      var toGo = this.elementsRemainingUp(gameObject,column,currentState[i][0]);
+      console.log(toGo);
+      if (toGo[0]== undefined){continue};
+      var b = gameObject.filter ((elem) => (elem[0] == this.lowestIndexInColumn(toGo,column) && elem[1]==column));
+      var c = currentState.filter ((elem) => (elem[0] == currentState[i][0] && elem[1]==column));
+      var withLowestIndexGameobject = b;
+      var withHighestIndexcurrentState = c[0][2];
+      removeArray(b,gameObject);
+      removeArray(c, currentState);
+      transition(c[0],b[0], generateCorrespondingBoxNo(c[0]),gameBoxes);
+      b[0][2] = c[0][2];
+      c[0][2] = 0;
+      currentState.push(b[0]);
+      gameObject.push(c[0]);
+      }
+      }
+  },
+
+  arrays: function (array) {
+    array.sort(function(a, b) {
+      return (b[0] - a[0]);
+    });
+  },
+
+  arrangeWithRows: function(array) {
+    var colOne = [];
+    var colTwo = [];
+    var colThree = [];
+    var colFour = [];
+
+    array.forEach(function(element) {
+      if(element[1] == 1) {colOne.push(element)};
+      if(element[1] == 2) {colTwo.push(element)};
+      if(element[1] == 3) {colThree.push(element)}; 
+      if(element[1] == 4) {colFour.push(element)};
+    })
+
+    var temp = [];
+    this.arrays(colOne);
+    this.arrays(colTwo);
+    this.arrays(colThree);
+    this.arrays(colFour);
+    colOne.forEach(function(element) {temp.push(element)});
+    colTwo.forEach(function(element) {temp.push(element)});
+    colThree.forEach(function(element) {temp.push(element)});
+    colFour.forEach(function(element) {temp.push(element)});
+    return temp;  
+  },
+
+  checkToAdd: function (currentState, gameObject, columnNo){
+  
+    currentState = this.arrangeWithRows(currentState);
+    for(var i= (currentState.length - 1 ); i >= 0 ; i--) {
+      if(currentState[i][1] == columnNo && i!=0 && currentState[i-1][1] == columnNo && currentState[i][2] == currentState[(i-1)][2]) {
+        var b = currentState[i][2] + currentState[(i-1)][2];
+        currentState[i][2] = b;
+        currentState[i-1][2] = undefined;
+        gameBoxes[generateCorrespondingBoxNo(currentState[i])].innerHTML = b;  
+        gameBoxes[generateCorrespondingBoxNo(currentState[i-1])].style.opacity = "0";
+        gameBoxes[generateCorrespondingBoxNo(currentState[i])].style.fontSize = "50px";
+        var t = generateCorrespondingBoxNo(currentState[i]);
+        setTimeout(function(){
+        gameBoxes[t].style.fontSize = "40px";  
+        },100);
+      } 
+    }
+    for(var i= (currentState.length - 1); i >=0 ; i--) {
+    if(currentState[i][2] == undefined ) {
+      var temporary = [];
+      temporary.push(currentState[i]);
+      removeArray(temporary, currentState);
+      temporary[0][2] = 0;
+      gameObject.push(temporary[0]);
+
+      }
+    }
+    return currentState;
+    }
+
+}
+
+function executeUpSwipe(){
+
+boxGen = swipeUp.arrangeWithRows(boxGen);
+for(var column=1; column <=4; column++ ){
+swipeUp.shiftUp(boxGen,a,column);
+
+}
+
+setTimeout(function(){
+var newElement = generateBoxes(a);
+for(var column=1; column <=4; column++ ){
+  boxGen = swipeUp.checkToAdd(boxGen, a, column);
+swipeUp.shiftUp(boxGen,a,column);}
+  for(i=0; i < newElement.length ; i++){
+    boxGen.push(newElement[i]);
+  }
+}, /*500*/ 251);
+
+}
+
+window.addEventListener("keydown",function(event){
+  if(window.event.key == "ArrowUp"){
+    executeUpSwipe();
+  }
+})
+
+let swipeLeft = {
+
+  elementsRemainingLeft: function(gameObject,rowNo,index) {  
+    var a = [];
+    for(var i = 0; i < gameObject.length; i++) {
+      if(gameObject[i][1] < index && gameObject[i][0]== rowNo){
+        a.push(gameObject[i]);                 
+      }
+    }   
+    return a;
+  } ,
+  lowestIndexInRow: function(currentState,rowNo) {
+    var b = [];
+    for(var i = 0; i < currentState.length; i++) {
+      if(currentState[i][0] == rowNo) {
+       b.push(currentState[i][1]);
+      }
+    }
+  return Math.min.apply(Math, b);
+  },
+  highestIndexInRow: function(currentState,rowNo) {
+    var b = [];
+    for(var i = 0 ; i < currentState.length; i++) {
+      if(currentState[i][0] == rowNo){
+       b.push(currentState[i][1]);
+      }
+    }
+  return Math.max.apply(Math, b);
+  },
+
+  shiftLeft: function(currentState, gameObject, rowNo){
+  for(var i=(currentState.length-1); i>=0; i--){
+    if(currentState[i][0] == rowNo) {
+      var gameObject = gameObject;
+      var toGo = this.elementsRemainingLeft(gameObject,rowNo,currentState[i][1]);
+      if (toGo[0] == undefined){ continue }
+      var b = gameObject.filter((elem) => (elem[1] == this.lowestIndexInRow(toGo,rowNo) && elem[0]==rowNo));
+      var c = currentState.filter((elem) => (elem[1] == currentState[i][1] && elem[0]==rowNo));
+      var withHighestIndexGameobject =  b;
+      var withHighestIndexcurrentState = c[0][2];
+      removeArray(b, gameObject);
+      removeArray(c, currentState);
+      transition(c[0],b[0], generateCorrespondingBoxNo(c[0]),gameBoxes);
+      b[0][2] = c[0][2];
+      c[0][2] = 0;
+
+      currentState.push(b[0]);
+      gameObject.push(c[0]);
+    }
+  }
+  },
+
+ 
+
+  arrays: function(array) {
+     array.sort(function(a,b){
+      return (b[1] - a[1]);
+     });
+  },
+
+  arrangeWithColumns: function (array){
+    // console.log(array);
+      var rowOne = [];
+      var rowTwo = [];
+      var rowThree = [];
+      var rowFour = [];
+
+          array.forEach(function(element){
+            if(element[0] == 1){rowOne.push(element)};
+            if(element[0] == 2){rowTwo.push(element)};
+            if(element[0] == 3){rowThree.push(element)}; 
+            if(element[0] == 4){rowFour.push(element)};
+          })
+        
+        var temp = [];
+        this.arrays(rowOne);
+        this.arrays(rowTwo);
+        this.arrays(rowThree);
+        this.arrays(rowFour);
+        rowOne.forEach(function(element){temp.push(element)});
+        rowTwo.forEach(function(element){temp.push(element)});
+        rowThree.forEach(function(element){temp.push(element)});
+        rowFour.forEach(function(element){temp.push(element)});
+        return temp;  
+  },
+
+  checkToAdd: function (currentState, gameObject, rowNo){
+   currentState = this.arrangeWithColumns(currentState);
+   for(var i= (currentState.length - 1); i >=0 ; i--){
+     if(currentState[i][0] == rowNo && i != 0 && currentState[i-1][0] == rowNo && currentState[i][2] == currentState[(i-1)][2]) {
+       var b = currentState[i][2] + currentState[(i-1)][2];
+       currentState[i][2] = b;
+       currentState[i-1][2] = undefined;
+       gameBoxes[generateCorrespondingBoxNo(currentState[i])].innerHTML = b;  
+       gameBoxes[generateCorrespondingBoxNo(currentState[i-1])].style.opacity = "0";
+       gameBoxes[generateCorrespondingBoxNo(currentState[i])].style.fontSize = "50px";
+       var t = generateCorrespondingBoxNo(currentState[i]);
+        setTimeout(function(){
+        gameBoxes[t].style.fontSize = "40px";  
+        },100);
+     }
+   }
+   for(var i= (currentState.length - 1); i >=0 ; i--){
+     if(currentState[i][2] == undefined ){
+      var temporary = [];
+      temporary.push(currentState[i]);
+      removeArray(temporary, currentState);
+      temporary[0][2] = 0;
+      gameObject.push(temporary[0]);
+      }
+   }
+   return currentState;
+  }  
+}
+function executeLeftSwipe() {
+
+boxGen = swipeLeft.arrangeWithColumns(boxGen);
+for(var row=1; row <=4; row++ ){
+swipeLeft.shiftLeft(boxGen,a,row);
+}
+
+setTimeout(function(){
+var newElement = generateBoxes(a);
+for(var row=1; row <=4; row++ ){
+  boxGen = swipeLeft.checkToAdd(boxGen, a, row);
+swipeLeft.shiftLeft(boxGen,a,row);}
+  for(i=0; i < newElement.length ; i++){
+    boxGen.push(newElement[i]);
+  }
+}, 251);
+}
+window.addEventListener("keydown",function(event){
+  if(window.event.key == "ArrowLeft"){
+    executeLeftSwipe();
   }
 })
