@@ -137,6 +137,8 @@ let swipeDown = {
 
         currentState[i][2] = b;
         currentState[i-1][2] = undefined;
+        gameBoxes[generateCorrespondingBoxNo(currentState[i])].innerHTML = b;  
+        gameBoxes[generateCorrespondingBoxNo(currentState[i-1])].style.opacity = "0";
 
 
       }
@@ -148,6 +150,7 @@ let swipeDown = {
       removeArray(temporary, currentState);
       temporary[0][2] = 0;
       gameObject.push(temporary[0]);
+
       }
     }
     return currentState;
@@ -335,11 +338,21 @@ function testSwipe(){
 boxGen = swipeDown.arrangeWithRows(boxGen);
 for(var column=1; column <=4; column++ ){
 swipeDown.shiftDown(boxGen,a,column);
+
 }
- var newElement = generateBoxes(a);
+
+setTimeout(function(){
+
+var newElement = generateBoxes(a);
+for(var column=1; column <=4; column++ ){
+  boxGen = swipeDown.checkToAdd(boxGen, a, column);
+swipeDown.shiftDown(boxGen,a,column);  }
   for(i=0; i < newElement.length ; i++){
     boxGen.push(newElement[i]);
   }
+
+
+}, 250);
 }
 function executeRightSwipe() {
   for(var row = 0; row <=4 ; row++ ){
@@ -383,3 +396,30 @@ function representCurrentState(currentState){
     generateHTMLBoxes(generateCorrespondingBoxNo(currentState[i]), currentState[i]);
   }
 }
+
+setInterval(function(){
+for(var i = 0 ; i < gameBoxes.length; i++){
+   if(gameBoxes[i].innerHTML == 2){
+    gameBoxes[i].style.background = "white";
+}
+  if(gameBoxes[i].innerHTML == 4){
+    gameBoxes[i].style.background = "red";
+}
+if(gameBoxes[i].innerHTML == 8){
+    gameBoxes[i].style.background = "yellow";
+}
+if(gameBoxes[i].innerHTML == 16){
+    gameBoxes[i].style.background = "pink";
+}
+if(gameBoxes[i].innerHTML == 32){
+    gameBoxes[i].style.background = "green";
+}
+}
+
+},100);
+
+window.addEventListener("keydown",function(event){
+  if(window.event.key = "ArrowDown"){
+    testSwipe();
+  }
+})
