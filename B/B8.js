@@ -42,6 +42,20 @@ for(i= 0; i< 1 ; i++){
 representCurrentState(boxGen);
 return boxGen;
 }
+function checkEqualityArrays(array1 , array2){
+  var counterVariable = 0 ;
+  for(var i=0 ; i < array1.length ; i++){
+     if(array1[i][0] == array2[i][0] && array1[i][1] == array2[i][1] && array1[i][2] == array2[i][2]){
+       counterVariable +=1;
+     }
+  }
+  for(var i=0 ; i < array2.length ; i++){
+     if(array1[i][0] == array2[i][0] && array1[i][1] == array2[i][1] && array1[i][2] == array2[i][2]){
+       counterVariable += 1 ;
+     }
+  }
+  if(counterVariable == array1.length + array2.length){return true} else {return false} ; 
+}
 
 let swipeDown = {
 
@@ -80,7 +94,7 @@ let swipeDown = {
     if(currentState[i][1] == column) {
       var gameObject=gameObject;
       var toGo = this.elementsRemainingDown(gameObject,column,currentState[i][0]);
-      console.log(toGo);
+
       if (toGo[0]== undefined){continue};
       var b = gameObject.filter ((elem) => (elem[0] == this.highestIndexInColumn(toGo,column) && elem[1]==column));
       var c = currentState.filter ((elem) => (elem[0] == currentState[i][0] && elem[1]==column));
@@ -153,7 +167,6 @@ let swipeDown = {
       removeArray(temporary, currentState);
       temporary[0][2] = 0;
       gameObject.push(temporary[0]);
-
       }
     }
     return currentState;
@@ -161,38 +174,7 @@ let swipeDown = {
 
 }
 
-function executeDownSwipe(){
-// for(var column=1; column <=4; column++ ){
-//   boxGen = swipeDown.arrangeWithRows(boxGen);
-//   swipeDown.shiftDown(boxGen,a,column);
-//   boxGen = swipeDown.checkToAdd(boxGen , a , column);
-//   swipeDown.shiftDown(boxGen, a ,column);
-//   boxGen = swipeDown.arrangeWithRows(boxGen);
-//   a = swipeDown.arrangeWithRows(a);
-// }
-//   console.log(boxGen);
-//   var newElement = generateBoxes(a);
-//   for(i=0; i < newElement.length ; i++){
-//     boxGen.push(newElement[i]);
-//   }
 
-  boxGen = swipeDown.arrangeWithRows(boxGen);
-for(var column=1; column <=4; column++ ){
-swipeDown.shiftDown(boxGen,a,column);
-
-}
-
-setTimeout(function(){
-var newElement = generateBoxes(a);
-for(var column=1; column <=4; column++ ){
-  boxGen = swipeDown.checkToAdd(boxGen, a, column);
-swipeDown.shiftDown(boxGen,a,column);}
-  for(i=0; i < newElement.length ; i++){
-    boxGen.push(newElement[i]);
-  }
-}, /*251*/ 251);
-
-}
 let swipeRight = {
 
   elementsRemainingRight: function(gameObject,rowNo,index) {  
@@ -388,16 +370,15 @@ gameBoxes[boxNo].style.opacity = "0";
 var a=[[1,1,0],[1,2,0],[1,3,0],[1,4,0],[2,1,0],[2,2,0],[2,3,0],[2,4,0],[3,1,0],[3,2,0],[3,3,0],[3,4,0],[4,1,0],[4,2,0],[4,3,0],[4,4,0]];
 var boxes = document.getElementsByClassName("items");
 var gameBoxes = document.getElementsByClassName("gameBoxes");
-var boxGen = [[4,4,2],[2,4,2]];
-representCurrentState(boxGen);
-removeArray(boxGen, a);
-// var boxGen = generateBoxes(a);
-
+// var boxGen = [[4,4,2],[2,4,2]];
+// representCurrentState(boxGen);
+// removeArray(boxGen, a);
+var boxGen = generateBoxes(a);
+enable();
 function testSwipe(){
 boxGen = swipeDown.arrangeWithRows(boxGen);
 for(var column=1; column <=4; column++ ){
 swipeDown.shiftDown(boxGen,a,column);
-
 }
 
 setTimeout(function(){
@@ -411,35 +392,7 @@ swipeDown.shiftDown(boxGen,a,column);}
 }, 251);
 
 }
-function executeRightSwipe() {
-  // for(var row = 0; row <=4 ; row++ ){
-  //   swipeRight.shiftRight(boxGen,a,row);
-  //   boxGen = swipeRight.checkToAdd(boxGen , a , row);
-  //   swipeRight.shiftRight(boxGen,a,row);
-  //   boxGen = swipeRight.arrangeWithColumns(boxGen);
-  //   a = swipeRight.arrangeWithColumns(a);
-  // }
-  // console.log(boxGen);
-  // var newElement = generateBoxes(a);
-  // for(i=0; i < newElement.length ; i++){
-  //     boxGen.push(newElement[i]);
-  //   }
 
-    boxGen = swipeRight.arrangeWithColumns(boxGen);
-for(var row=1; row <=4; row++ ){
-swipeRight.shiftRight(boxGen,a,row);
-}
-
-setTimeout(function(){
-var newElement = generateBoxes(a);
-for(var row=1; row <=4; row++ ){
-  boxGen = swipeRight.checkToAdd(boxGen, a, row);
-swipeRight.shiftRight(boxGen,a,row);}
-  for(i=0; i < newElement.length ; i++){
-    boxGen.push(newElement[i]);
-  }
-}, /*400*/ 251);
-}
 function transition(a,b, boxNo,gameBoxes){
   var boxa = boxes[generateCorrespondingBoxNo(a)];
   var boxb = boxes[generateCorrespondingBoxNo(b)];
@@ -474,35 +427,35 @@ for(var i = 0 ; i < gameBoxes.length; i++){
    if(gameBoxes[i].innerHTML == 2){
     gameBoxes[i].style.background = "#ffffdd";
 }
-  if(gameBoxes[i].innerHTML == 4){
-    gameBoxes[i].style.background = "#ffff9a";
+else if(gameBoxes[i].innerHTML == 4){
+  gameBoxes[i].style.background = "#ffff9a";
 }
-if(gameBoxes[i].innerHTML == 8){
-    gameBoxes[i].style.background = "orange";
+else if(gameBoxes[i].innerHTML == 8){
+  gameBoxes[i].style.background = "orange";
 }
-if(gameBoxes[i].innerHTML == 16){
+else if(gameBoxes[i].innerHTML == 16){
     gameBoxes[i].style.background = "#ff8b00";
 }
-if(gameBoxes[i].innerHTML == 32){
+else if(gameBoxes[i].innerHTML == 32){
     gameBoxes[i].style.background = "#ff5c2d";
 }
-if(gameBoxes[i].innerHTML == 64){
+else if(gameBoxes[i].innerHTML == 64){
     gameBoxes[i].style.background = "rgb(226, 69, 35)";
 }
-if(gameBoxes[i].innerHTML == 128){
+else if(gameBoxes[i].innerHTML == 128){
     gameBoxes[i].style.background = "rgb(240, 69, 35)";
 }
-if(gameBoxes[i].innerHTML == 256){
+else if(gameBoxes[i].innerHTML == 256){
     gameBoxes[i].style.background = "rgb(240, 50, 20)";
 }
-if(gameBoxes[i].innerHTML == 512){
+else if(gameBoxes[i].innerHTML == 512){
     gameBoxes[i].style.background = "rgb(240, 30, 10)";
 }
-if(gameBoxes[i].innerHTML == 1024){
+else if(gameBoxes[i].innerHTML == 1024){
     gameBoxes[i].style.background = "rgb(240, 10, 05)";
 }
-if(gameBoxes[i].innerHTML == 2048){
-    gameBoxes[i].style.background = "rgb(240, 0, 0)";
+else if(gameBoxes[i].innerHTML == 2048){
+    gameBoxes[i].style.background = "rgb(240, 0, )";
 }
 }
 if(a.length == 0){
@@ -511,16 +464,7 @@ if(a.length == 0){
 
 },100);
 
-window.addEventListener("keydown",function(event){
-  if(window.event.key == "ArrowDown"){
-    executeDownSwipe();
-  }
-})
-window.addEventListener("keydown",function(event){
-  if(window.event.key == "ArrowRight"){
-    executeRightSwipe();
-  }
-})
+
 
 let swipeUp = {
 
@@ -638,33 +582,6 @@ let swipeUp = {
     }
 
 }
-
-function executeUpSwipe(){
-
-boxGen = swipeUp.arrangeWithRows(boxGen);
-for(var column=1; column <=4; column++ ){
-swipeUp.shiftUp(boxGen,a,column);
-
-}
-
-setTimeout(function(){
-var newElement = generateBoxes(a);
-for(var column=1; column <=4; column++ ){
-  boxGen = swipeUp.checkToAdd(boxGen, a, column);
-swipeUp.shiftUp(boxGen,a,column);}
-  for(i=0; i < newElement.length ; i++){
-    boxGen.push(newElement[i]);
-  }
-}, /*500*/ 251);
-
-}
-
-window.addEventListener("keydown",function(event){
-  if(window.event.key == "ArrowUp"){
-    executeUpSwipe();
-  }
-})
-
 let swipeLeft = {
 
   elementsRemainingLeft: function(gameObject,rowNo,index) {  
@@ -702,9 +619,9 @@ let swipeLeft = {
       var toGo = this.elementsRemainingLeft(gameObject,rowNo,currentState[i][1]);
       if (toGo[0] == undefined){ continue }
       var b = gameObject.filter((elem) => (elem[1] == this.lowestIndexInRow(toGo,rowNo) && elem[0]==rowNo));
-      var c = currentState.filter((elem) => (elem[1] == currentState[i][1] && elem[0]==rowNo));
-      var withHighestIndexGameobject =  b;
-      var withHighestIndexcurrentState = c[0][2];
+      var c = currentState.filter((elem) => (elem[1] == currentState[i][1]/*this.highestIndexInRow(currentState, rowNo) */ && elem[0]==rowNo));
+      var withLowestIndexGameobject =  b;
+      var withLowestIndexcurrentState = c[0][2];
       removeArray(b, gameObject);
       removeArray(c, currentState);
       transition(c[0],b[0], generateCorrespondingBoxNo(c[0]),gameBoxes);
@@ -752,6 +669,7 @@ let swipeLeft = {
   },
 
   checkToAdd: function (currentState, gameObject, rowNo){
+    
    currentState = this.arrangeWithColumns(currentState);
    for(var i= (currentState.length - 1); i >=0 ; i--){
      if(currentState[i][0] == rowNo && i != 0 && currentState[i-1][0] == rowNo && currentState[i][2] == currentState[(i-1)][2]) {
@@ -766,7 +684,7 @@ let swipeLeft = {
         gameBoxes[t].style.fontSize = "40px";  
         },100);
      }
-   }
+      }
    for(var i= (currentState.length - 1); i >=0 ; i--){
      if(currentState[i][2] == undefined ){
       var temporary = [];
@@ -779,8 +697,129 @@ let swipeLeft = {
    return currentState;
   }  
 }
-function executeLeftSwipe() {
 
+
+function arrowKeys(event){
+  if(window.event.key == "ArrowDown"){
+    executeDownSwipe();
+  }
+  if(window.event.key == "ArrowRight"){
+    executeRightSwipe();
+  }
+  if(window.event.key == "ArrowUp"){
+    executeUpSwipe();
+  }
+  if(window.event.key == "ArrowLeft"){
+    executeLeftSwipe();
+  }
+}  
+
+function enable(){
+ window.addEventListener("keydown", arrowKeys); 
+}
+function disable(){
+  window.removeEventListener("keydown", arrowKeys);  
+}
+
+
+function executeDownSwipe(){
+// for(var column=1; column <=4; column++ ){
+//   boxGen = swipeDown.arrangeWithRows(boxGen);
+//   swipeDown.shiftDown(boxGen,a,column);
+//   boxGen = swipeDown.checkToAdd(boxGen , a , column);
+//   swipeDown.shiftDown(boxGen, a ,column);
+//   boxGen = swipeDown.arrangeWithRows(boxGen);
+//   arrays = swipeDown.arrangeWithRows(a);
+// }
+//   console.log(boxGen);
+//   var newElement = generateBoxes(a);
+//   for(i=0; i < newElement.length ; i++){
+//     boxGen.push(newElement[i]);
+//   }
+  disable();
+  boxGen = swipeDown.arrangeWithRows(boxGen);
+for(var column=1; column <=4; column++ ){
+swipeDown.shiftDown(boxGen,a,column);
+}
+
+setTimeout(function(){
+var newElement = generateBoxes(a);
+var checkValidMovement = boxGen;
+console.log(checkValidMovement);
+for(var column=1; column <=4; column++ ){
+boxGen = swipeDown.checkToAdd(boxGen, a, column);
+swipeDown.shiftDown(boxGen,a,column);}
+console.log(checkValidMovement);
+if(!(checkEqualityArrays(checkValidMovement, boxGen))){
+  for(i=0 ; i < newElement.length ; i++){
+boxGen.push(newElement[i]);
+}
+}
+}, /*251*/ 400);
+setTimeout(function(){
+enable();
+}, 401);
+}
+function executeRightSwipe() {
+  // for(var row = 0; row <=4 ; row++ ){
+  //   swipeRight.shiftRight(boxGen,a,row);
+  //   boxGen = swipeRight.checkToAdd(boxGen , a , row);
+  //   swipeRight.shiftRight(boxGen,a,row);
+  //   boxGen = swipeRight.arrangeWithColumns(boxGen);
+  //   a = swipeRight.arrangeWithColumns(a);
+  // }
+  // console.log(boxGen);
+  // var newElement = generateBoxes(a);
+  // for(i=0; i < newElement.length ; i++){
+  //     boxGen.push(newElement[i]);
+  //   }
+  disable();
+    boxGen = swipeRight.arrangeWithColumns(boxGen);
+for(var row=1; row <=4; row++ ){
+swipeRight.shiftRight(boxGen,a,row);
+}
+
+setTimeout(function(){
+var newElement = generateBoxes(a);
+for(var row=1; row <=4; row++ ){
+  boxGen = swipeRight.checkToAdd(boxGen, a, row);
+swipeRight.shiftRight(boxGen,a,row);}
+  for(i=0; i < newElement.length ; i++){
+    boxGen.push(newElement[i]);
+  }
+}, /*400*/ 400);
+
+setTimeout(function(){
+enable();
+}, 401);
+
+}
+function executeUpSwipe(){
+disable();
+boxGen = swipeUp.arrangeWithRows(boxGen);
+for(var column=1; column <=4; column++ ){
+swipeUp.shiftUp(boxGen,a,column);
+
+}
+
+setTimeout(function(){
+var newElement = generateBoxes(a);
+for(var column=1; column <=4; column++ ){
+  boxGen = swipeUp.checkToAdd(boxGen, a, column);
+swipeUp.shiftUp(boxGen,a,column);}
+  for(i=0; i < newElement.length ; i++){
+    boxGen.push(newElement[i]);
+  }
+}, /*500*/ 400);
+
+setTimeout(function(){
+enable();
+}, 401);
+
+
+}
+function executeLeftSwipe() {
+disable();
 boxGen = swipeLeft.arrangeWithColumns(boxGen);
 for(var row=1; row <=4; row++ ){
 swipeLeft.shiftLeft(boxGen,a,row);
@@ -790,14 +829,14 @@ setTimeout(function(){
 var newElement = generateBoxes(a);
 for(var row=1; row <=4; row++ ){
   boxGen = swipeLeft.checkToAdd(boxGen, a, row);
-swipeLeft.shiftLeft(boxGen,a,row);}
-  for(i=0; i < newElement.length ; i++){
+  swipeLeft.shiftLeft(boxGen,a,row);}
+   for(var i=0; i < newElement.length ; i++){
     boxGen.push(newElement[i]);
-  }
-}, 251);
 }
-window.addEventListener("keydown",function(event){
-  if(window.event.key == "ArrowLeft"){
-    executeLeftSwipe();
-  }
-})
+ 
+}, 400);
+
+setTimeout(function(){
+enable();
+}, 401);
+}
