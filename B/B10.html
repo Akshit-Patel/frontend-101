@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Github</title>
+	<style>
+    h1{
+       text-align: center;
+       margin : 0 auto;
+    }
+    #input{
+    	position: sticky;
+    	width: 100%;
+    	display: flex;
+    	
+    	justify-content: center;
+    	height: 80px;
+    	align-items: center;
+    }
+    input{
+        height: 30px;
+    } 
+    button{
+    	height: 36px;
+    }
+    .container{
+       position: sticky;
+       width: 100%;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+    }
+    .container #profilePhoto{
+    	width: 300px;
+    	height: 300px;
+    	background-size: cover;
+    }
+    .container #name{
+        width:  500px;
+        height : 50px;
+        font-size: 30px;
+        line-height: 50px;
+        text-align: center;
+    }
+    .container #bio{
+        width:500px;
+        font-size: 20px;
+        text-align: center;
+        display: inline-block;   
+        word-wrap: break-word;  
+    }
+
+    </style>
+</head>
+<body>
+<h1> Enter Your Github Username </h1>
+<div id = "input">
+<input type="text" placeholder="name" name="github_profile">
+<button onclick="XML_HTTP()">with XMLHTTPRequest </button>
+<button onclick="">with API fetch </button>
+<button onclick="">jQuery AJAX</button>
+</div>
+<div class = "container">
+<div id= "profilePhoto"></div>
+<div id= "name"></div>
+<div id= "bio"></div>
+</div>
+<script type="text/javascript" src="B10.js"></script>
+</body>
+</html>
