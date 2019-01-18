@@ -49,6 +49,9 @@ Creating a chrome extension which console logs "Hurray" when you visit DVM sites
 
 #### [Additional Task B10](https://akshit-patel.github.io/frontend-101/B/B10.html)
 Creating a 'get' request to display github profile picture, name and bio  in 3 ways - 
+
 1.) XMLHttpRequest 
+
 2.) *fetch* API
+
 3.) jQuery AJAX
