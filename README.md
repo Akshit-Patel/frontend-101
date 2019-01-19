@@ -44,6 +44,9 @@ When "DVM" (with capitals) on blank page, all key stroke gets detected and gener
 #### [Task B5 – Image Slide In](https://akshit-patel.github.io/frontend-101/B/B5.html)
 Images slide in as you scroll page
 
+#### [Task B6 – FrontEnd Tech](https://akshit-patel.github.io/frontend-101/B/B6.html)
+To create a list which can add remove items with help of local storage to retain data when reloaded
+
 #### [Task B9 – Create a basic chrome extension](https://github.com/Akshit-Patel/frontend-101/tree/master/B)
 Creating a chrome extension which console logs "Hurray" when you visit DVM sites particularly [OASIS](https://www.bits-oasis.org/2018main/), [BOSM](https://www.bits-bosm.org/), [APOGEE](https://bits-apogee.org/2019intro/)
 
