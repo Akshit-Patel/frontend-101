@@ -290,53 +290,6 @@ let swipeRight = {
   }  
 }
 
-  // checkToAdd: function (currentState, gameObject, columnNo){
-  
-  //   currentState = this.arrangeWithRows(currentState);
-  //   for(var i= ( currentState.length - 1 ); i >= 0 ; i--) {
-  //     if(currentState[i][1] == columnNo && i!=0 && currentState[i-1][1] == columnNo && currentState[i][2] == currentState[(i-1)][2]) {
-  //       var b = currentState[i][2] + currentState[(i-1)][2];
-
-  //       currentState[i][2] = b;
-  //       currentState[i-1][2] = undefined;
-  //       gameBoxes[generateCorrespondingBoxNo(currentState[i])].innerHTML = b;  
-  //       gameBoxes[generateCorrespondingBoxNo(currentState[i-1])].style.opacity = "0";
-  //       gameBoxes[generateCorrespondingBoxNo(currentState[i])].style.fontSize = "50px";
-  //       var t = generateCorrespondingBoxNo(currentState[i]);
-  //       setTimeout(function(){
-  //       gameBoxes[t].style.fontSize = "40px";  
-  //       },100);
-  //     } 
-  //   }
-  //   for(var i= (currentState.length - 1); i >=0 ; i--) {
-  //   if(currentState[i][2] == undefined ) {
-  //     var temporary = [];
-  //     temporary.push(currentState[i]);
-  //     removeArray(temporary, currentState);
-  //     temporary[0][2] = 0;
-  //     gameObject.push(temporary[0]);
-
-  //     }
-  //   }
-  //   return currentState;
-  //   } 
-
-// function executeRightSwipe(){
-// //   var a=[[1,1,0],[1,2,0],[1,3,0],[1,4,0],[2,1,0],[2,2,0],[2,3,0],[2,4,0],[3,1,0],[3,2,0],[3,3,0],[3,4,0],[4,1,0],[4,2,0],[4,3,0],[4,4,0]];
-//   for(var row = 0; row <=4 ; row++ ){
-//     swipeRight.shiftRight(boxGen,a,row);
-//     boxGen = swipeRight.checkToAdd(boxGen , a , row);
-//     swipeRight.shiftRight(boxGen,a,row);
-//     boxGen = swipeRight.arrangeWithColumns(boxGen);
-//     a = swipeRight.arrangeWithColumns(a);
-//   }
-//   console.log(boxGen);
-//   var newElement = generateBoxes(a);
-//   for(i=0; i < newElement.length ; i++){
-//       boxGen.push(newElement[i]);
-//     }
-// }
-
 // this part below needs to be made DRY
 function generateCorrespondingBoxNo(elem){
   if(elem[0] == 1 && elem[1] == 1){ return 0};
@@ -370,9 +323,6 @@ gameBoxes[boxNo].style.opacity = "0";
 var a=[[1,1,0],[1,2,0],[1,3,0],[1,4,0],[2,1,0],[2,2,0],[2,3,0],[2,4,0],[3,1,0],[3,2,0],[3,3,0],[3,4,0],[4,1,0],[4,2,0],[4,3,0],[4,4,0]];
 var boxes = document.getElementsByClassName("items");
 var gameBoxes = document.getElementsByClassName("gameBoxes");
-// var boxGen = [[4,4,2],[2,4,2]];
-// representCurrentState(boxGen);
-// removeArray(boxGen, a);
 var boxGen = generateBoxes(a);
 enable();
 function testSwipe(){
@@ -401,20 +351,16 @@ function transition(a,b, boxNo,gameBoxes){
   var offsetLeft_a = boxa.offsetLeft;
   var offsetTop_b = boxb.offsetTop;
   var offsetLeft_b = boxb.offsetLeft;
-  var translateX = offsetLeft_b - offsetLeft_a;
-  var translateY = offsetTop_b - offsetTop_a; 
+  var translateX = offsetLeft_b - offsetLeft_a ;
+  var translateY = offsetTop_b - offsetTop_a ;
   tomove.style.transform = "translate(" + translateX + "px," + translateY + "px)";
-  // removeHTMLBoxes(generateCorrespondingBoxNo(a),a);
   tomove.style.opacity = "0";
   setTimeout(function(){
     generateHTMLBoxes(generateCorrespondingBoxNo(b),b);
     tomove.style.transform = "initial";
     tomove.innerHTML = 0;
-  },250);
+  },99);
 }
-
-// generateHTMLBoxes(0);  
-// transition([1,1],[1,4]);
 
 function representCurrentState(currentState){
   for(var i = 0 ; i < currentState.length ; i++){
@@ -424,7 +370,7 @@ function representCurrentState(currentState){
 
 setInterval(function(){
 for(var i = 0 ; i < gameBoxes.length; i++){
-   if(gameBoxes[i].innerHTML == 2){
+if(gameBoxes[i].innerHTML == 2){
     gameBoxes[i].style.background = "#ffffdd";
 }
 else if(gameBoxes[i].innerHTML == 4){
@@ -643,7 +589,6 @@ let swipeLeft = {
   },
 
   arrangeWithColumns: function (array){
-    // console.log(array);
       var rowOne = [];
       var rowTwo = [];
       var rowThree = [];
@@ -723,56 +668,31 @@ function disable(){
 
 
 function executeDownSwipe(){
-// for(var column=1; column <=4; column++ ){
-//   boxGen = swipeDown.arrangeWithRows(boxGen);
-//   swipeDown.shiftDown(boxGen,a,column);
-//   boxGen = swipeDown.checkToAdd(boxGen , a , column);
-//   swipeDown.shiftDown(boxGen, a ,column);
-//   boxGen = swipeDown.arrangeWithRows(boxGen);
-//   arrays = swipeDown.arrangeWithRows(a);
-// }
-//   console.log(boxGen);
-//   var newElement = generateBoxes(a);
-//   for(i=0; i < newElement.length ; i++){
-//     boxGen.push(newElement[i]);
-//   }
-  disable();
-  boxGen = swipeDown.arrangeWithRows(boxGen);
+disable();
+boxGen = swipeDown.arrangeWithRows(boxGen);
 for(var column=1; column <=4; column++ ){
 swipeDown.shiftDown(boxGen,a,column);
+var checkValidMovement = boxGen;
 }
 
 setTimeout(function(){
 var newElement = generateBoxes(a);
-var checkValidMovement = boxGen;
-console.log(checkValidMovement);
+// console.log(checkValidMovement);
 for(var column=1; column <=4; column++ ){
 boxGen = swipeDown.checkToAdd(boxGen, a, column);
-swipeDown.shiftDown(boxGen,a,column);}
-console.log(checkValidMovement);
-if(!(checkEqualityArrays(checkValidMovement, boxGen))){
-  for(i=0 ; i < newElement.length ; i++){
+setTimeout(() => {swipeDown.shiftDown(boxGen,a,column)},150);
+
+}
+for(i=0 ; i < newElement.length ; i++){
 boxGen.push(newElement[i]);
 }
-}
-}, /*251*/ 400);
 setTimeout(function(){
 enable();
-}, 401);
+}, 50);
+}, 220);
+
 }
 function executeRightSwipe() {
-  // for(var row = 0; row <=4 ; row++ ){
-  //   swipeRight.shiftRight(boxGen,a,row);
-  //   boxGen = swipeRight.checkToAdd(boxGen , a , row);
-  //   swipeRight.shiftRight(boxGen,a,row);
-  //   boxGen = swipeRight.arrangeWithColumns(boxGen);
-  //   a = swipeRight.arrangeWithColumns(a);
-  // }
-  // console.log(boxGen);
-  // var newElement = generateBoxes(a);
-  // for(i=0; i < newElement.length ; i++){
-  //     boxGen.push(newElement[i]);
-  //   }
   disable();
     boxGen = swipeRight.arrangeWithColumns(boxGen);
 for(var row=1; row <=4; row++ ){
@@ -783,15 +703,17 @@ setTimeout(function(){
 var newElement = generateBoxes(a);
 for(var row=1; row <=4; row++ ){
   boxGen = swipeRight.checkToAdd(boxGen, a, row);
-swipeRight.shiftRight(boxGen,a,row);}
+  setTimeout(() => {swipeRight.shiftRight(boxGen,a,row)},150);
+ }
   for(i=0; i < newElement.length ; i++){
     boxGen.push(newElement[i]);
   }
-}, /*400*/ 400);
-
-setTimeout(function(){
+  setTimeout(function(){
 enable();
-}, 401);
+}, 50);
+
+},  220);
+
 
 }
 function executeUpSwipe(){
@@ -806,16 +728,15 @@ setTimeout(function(){
 var newElement = generateBoxes(a);
 for(var column=1; column <=4; column++ ){
   boxGen = swipeUp.checkToAdd(boxGen, a, column);
-swipeUp.shiftUp(boxGen,a,column);}
+setTimeout(() => {swipeUp.shiftUp(boxGen,a,column)},150);}
   for(i=0; i < newElement.length ; i++){
     boxGen.push(newElement[i]);
   }
-}, /*500*/ 400);
-
-setTimeout(function(){
+  setTimeout(function(){
 enable();
-}, 401);
+}, 50);
 
+}, /*500*/ 220);
 
 }
 function executeLeftSwipe() {
@@ -830,13 +751,13 @@ var newElement = generateBoxes(a);
 for(var row=1; row <=4; row++ ){
   boxGen = swipeLeft.checkToAdd(boxGen, a, row);
   swipeLeft.shiftLeft(boxGen,a,row);}
-   for(var i=0; i < newElement.length ; i++){
-    boxGen.push(newElement[i]);
+  for(var i=0; i < newElement.length ; i++){
+  boxGen.push(newElement[i]);
 }
  
-}, 400);
+}, 250);
 
 setTimeout(function(){
 enable();
-}, 401);
+}, 300);
 }
