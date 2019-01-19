@@ -46,3 +46,12 @@ Images slide in as you scroll page
 
 #### [Task B9 – Create a basic chrome extension](https://github.com/Akshit-Patel/frontend-101/tree/master/B)
 Creating a chrome extension which console logs "Hurray" when you visit DVM sites particularly [OASIS](https://www.bits-oasis.org/2018main/), [BOSM](https://www.bits-bosm.org/), [APOGEE](https://bits-apogee.org/2019intro/)
+
+#### [Additional Task B10](https://akshit-patel.github.io/frontend-101/B/B10.html)
+Creating a 'get' request to display github profile picture, name and bio  in 3 ways - 
+
+1.) XMLHttpRequest 
+
+2.) *fetch* API
+
+3.) jQuery AJAX
