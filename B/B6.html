@@ -47,13 +47,10 @@ div.container .heading{
 	margin-bottom: 50px;
 	margin-top: 20px;
 }
-/*.items div:nth-child(2){
-   padding-left: 50px;
-}*/
 .addItems{
   margin: 50px;
 }
-.addItems button{
+.addItems button, .items .removeItems button{
   border: solid 1px black;
   background-color: inherit;
   padding: 14px 0px;
@@ -63,8 +60,12 @@ div.container .heading{
   background: #b9b8b8;
 }
 .items input[type="checkbox"]{
-	border: none;
-	background: inherit;
+  border: none;
+  background: inherit;
+}
+.items .removeItems{
+  width: 100%;
+  padding-left: 310px;
 }
 .addItems input{
   border: 1px solid black;
@@ -78,28 +79,20 @@ div.container .heading{
 	height: 350px;
 	overflow: auto;
 }
-/*.items div:nth-last-child(2){
-	margin-bottom : 50px;
-}*/
+
 </style>
 
 <body>
 <div class="container">
 <div class="heading">FrontEnd Tech</div>
 <div id="list">
-<div class="items elements"><input type="checkbox">HTML</div>
-<div class="items elements"><input type="checkbox">CSS</div>
-<div class="items elements"><input type="checkbox">JavascriptL</div>
-<div class="items elements"><input type="checkbox">React.js</div>
-<div class="items elements"><input type="checkbox">Angular</div>
 </div>
 <div class="items">
 	<div class="addItems"><input type="text"></div>
 	<div class="addItems"><button>Add Items</button></div>
 </div>
 <div class="items">
-	<div class="addItems"><input type="text"></div>
-	<div class="addItems"><button>Remove Items</button></div>
+	<div class="removeItems"><button>Remove Items</button></div>
 </div>
 </div>
 <script>
@@ -107,29 +100,69 @@ div.container .heading{
 	var content = document.querySelector('.items:nth-last-child(2) .addItems input');
 	var AddButton = document.querySelector('.items:nth-last-child(2) button');
     var removeButton = document.querySelector('.items:nth-last-child(1) button');
+    var counter= -1;
+    var divStorage = [];
+    
+    window.onload = function() {
+	  
+	if(window.localStorage.getItem('counter') !== null && window.localStorage.getItem('item') !== null){
+		
+	   counterValue = JSON.parse(window.localStorage.getItem('counter'));
+	   getStorage = JSON.parse(window.localStorage.getItem('item'));
+	   counter = JSON.parse(window.localStorage.getItem('counter'));
+	   for(i = 0 ; i < getStorage.length ; i++){
+	     	addData(getStorage[i],i);
+	  }
+	}
+	}
+    function createItem(contentValue){
+    	let div = document.createElement('div');
+		div.className = "items elements";
+		div.innerHTML = "<input type='checkbox'>" + contentValue;
+		let a = div.querySelector("input[type='checkbox']");
+		list.appendChild(div);	
+		return div;
+    }
+    function addData(contentValue,counter){
+
+    	divStorage[counter] = contentValue;
+    	if(contentValue != null){
+    		let div = createItem(contentValue);
+		    let division = new remove(div,counter);
+			division.remove();
+        }
+	    
+    }
 
     AddButton.addEventListener("click", function(){ 
-	let div = document.createElement('div');
-	div.className = "items elements";
-	div.innerHTML = "<input type='checkbox'>" + content.value;
-	list.append(div);
+	let div = createItem(content.value);
+    counter = counter+1;
+	let division = new remove(div,counter);
+	division.remove();
+    divStorage[counter] = content.value;
+	window.localStorage.setItem('item', JSON.stringify(divStorage));
+	window.localStorage.setItem('counter',counter);
+
 	})
 
-   removeButton.addEventListener("click" , function(){
-   var elements = document.querySelectorAll("div[class='items elements']");
-   var checkBoxes = document.querySelectorAll("input[type='checkbox']");
-   for(var i=0; i < elements.length ; i++){
-   	console.log(i);
-    elements[i].addEventListener("click" , function(){
-     this.classList.toggle("checked");	
-    })
-   }
+	function remove(checkbox,counter){
+	this.remove = function(){
+	   removeButton.addEventListener("click" , function(){
+	       	if(checkbox){
+		       	var t = checkbox.firstElementChild;
+		      
+		    	if(t.checked  == true){
+			    	t.checked = false;
+			    	divStorage[counter] = null;
+			    	checkbox.parentNode.removeChild(checkbox);
+			     	window.localStorage.setItem('item', JSON.stringify(divStorage));
+			    }
+	       	}
+	    }); 
+	    
+	}
+	}
 
-    var checked = document.querySelectorAll("div[class='items elements checked']");
-    for(i=0 ; i< checked.length ; i++){
-    checked[i].parentNode.removeChild(checked[i]);
-    }
-   })
 </script>
 </body>
 </html>
